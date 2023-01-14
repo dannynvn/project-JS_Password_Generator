@@ -14,26 +14,19 @@ function writePassword() {
     //prompt user for amount of characters to include for password length; minimum is 8; maximum is 128
     var passwordLength = Number(prompt("How many characters would you like your password to contain? (min: 8 characters / max: 128 characters)"));
 
-    // var passLengthCheck = false;
-    // while(passLengthCheck == false) {
-    //   if (passwordLength < 8 || passwordLength > 128) {
-    //     passLengthCheck = false;
-    //   } else {
-    //     passLengthCheck = true;
-    //   }
-    // } 
+    if (passwordLength < 8 || passwordLength > 128) {
+      return "Please input a value between 8 and 128";
+    } 
+    
 
-    //prompt user if they'd like to include lowercase alphabet characters
+    //prompts user for characters to include in generated password
     var lowercaseAlphaConfirm = window.confirm("Would you like to include lowercase alphabet letters?");
-    //prompt user if they'd like to include uppercase alphabet characters
     var uppercaseAlphaConfirm = window.confirm("Would you like to include uppercase alphabet letters?");
-    //prompt user if they'd like to include numeric characters
     var numericCharConfirm = window.confirm("Would you like to include numeric characters?");
-    //prompt user if they'd like to include special characters
     var specialCharConfirm = window.confirm("Would you like to include special characters?");
       
 
-    //create separate arrays for each criteria
+    //create separate arrays for each character criteria
     var lowercaseAlpha = 'abcdefghijklmnopqrstuvwxyz'.split (
       ''
     );
@@ -47,7 +40,7 @@ function writePassword() {
       ''
     );
 
-    //if logic determining which characters to include in password; determined through user prompts
+    //if statements to determine which characters to include in password as set by user prompts
     var passwordCharacters = []
     if (lowercaseAlphaConfirm == true) {
       passwordCharacters = [...passwordCharacters, ...lowercaseAlpha];
@@ -61,6 +54,10 @@ function writePassword() {
     if (specialCharConfirm == true) {
       passwordCharacters = [...passwordCharacters, ...specialChar];
     }  
+    if (lowercaseAlphaConfirm == false && uppercaseAlphaConfirm == false && numericCharConfirm == false && specialCharConfirm == false) {
+      window.confirm("You must select at least 1 password character criteria.");
+      return "Please regenerate password";
+    }
 
     //randomly choose and append characters into one final password string
     var passwordString = ''
