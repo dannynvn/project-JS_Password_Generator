@@ -24,20 +24,44 @@ function writePassword() {
     // } 
 
     //prompt user if they'd like to include lowercase alphabet characters
-    var lowercaseAlphabet = window.confirm("Would you like to include lowercase alphabet letters?");
+    var lowercaseAlphaConfirm = window.confirm("Would you like to include lowercase alphabet letters?");
     //prompt user if they'd like to include uppercase alphabet characters
-    var uppercaseAlphabet = window.confirm("Would you like to include uppercase alphabet letters?");
+    var uppercaseAlphaConfirm = window.confirm("Would you like to include uppercase alphabet letters?");
     //prompt user if they'd like to include numeric characters
-    var numericChar = window.confirm("Would you like to include numeric characters?");
+    var numericCharConfirm = window.confirm("Would you like to include numeric characters?");
     //prompt user if they'd like to include special characters
-    var specialChar = window.confirm("Would you like to include special characters?");
+    var specialCharConfirm = window.confirm("Would you like to include special characters?");
       
 
-    //create an array of all possible password characters
-    passwordCharacters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~'.split (
+    //create separate arrays for each criteria
+    var lowercaseAlpha = 'abcdefghijklmnopqrstuvwxyz'.split (
       ''
     );
-    
+    var uppercaseAlpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split (
+      ''
+    );
+    var numericChar = '0123456789'.split (
+      ''
+    );
+    var specialChar = '!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~'.split (
+      ''
+    );
+
+    //if logic determining which characters to include in password; determined through user prompts
+    var passwordCharacters = []
+    if (lowercaseAlphaConfirm == true) {
+      passwordCharacters = [...passwordCharacters, ...lowercaseAlpha];
+    } 
+    if (uppercaseAlphaConfirm == true) {
+      passwordCharacters = [...passwordCharacters, ...uppercaseAlpha];
+    }
+    if (numericCharConfirm == true) {
+      passwordCharacters = [...passwordCharacters, ...numericChar];
+    } 
+    if (specialCharConfirm == true) {
+      passwordCharacters = [...passwordCharacters, ...specialChar];
+    }  
+
     //randomly choose and append characters into one final password string
     var passwordString = ''
     for (var i = 0; i < passwordLength; i++) {
@@ -45,7 +69,6 @@ function writePassword() {
       passwordString += passwordCharacters[random];
     }
     return passwordString;
-
   }
 
 }
